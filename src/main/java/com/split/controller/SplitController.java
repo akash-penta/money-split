@@ -18,6 +18,13 @@ public class SplitController {
 	@Autowired
 	SpiltService splitService;
 	
+	@GetMapping()
+	public String welcome() {
+		return "<center><h1>Money-Split</h1>"
+				+ "<h5>This an API</h5>"
+				+ "<h3>Developed by AKASH PENTA</h3></center>";
+	}
+	
 	@GetMapping("/getReport")
 	public ArrayList<ReportDTO> getReport(@RequestBody List<EachPersonDTO> eachPersonDTOList) {
 		ArrayList<ReportDTO> res = splitService.getReport(eachPersonDTOList);
