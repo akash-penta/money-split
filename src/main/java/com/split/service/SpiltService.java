@@ -35,7 +35,7 @@ public class SpiltService {
 					reportMap.put(consider_key, 0.0);
 				}
 				else {
-					reportMap.put((String) kv.getKey(), (double) kv.getValue() - split_amount);
+					reportMap.put((String) kv.getKey(), (double)Math.round(((double) kv.getValue() - split_amount)*100)/100);
 				}
 			}
 			ReportDTO reportDTO = new ReportDTO(consider_key);
@@ -43,10 +43,10 @@ public class SpiltService {
 			ArrayList<EachPersonDTO> pos = new ArrayList<>();
 			for(Map.Entry kv: reportMap.entrySet()) {
 				if((double)kv.getValue() < 0) {
-					neg.add(new EachPersonDTO((String)kv.getKey(), (double)kv.getValue()));
+					neg.add(new EachPersonDTO((String)kv.getKey(), Math.abs((double)kv.getValue())));
 				}
 				else if((double)kv.getValue() > 0) {
-					pos.add(new EachPersonDTO((String)kv.getKey(), (double)kv.getValue()));
+					pos.add(new EachPersonDTO((String)kv.getKey(), Math.abs((double)kv.getValue())));
 				}
 			}
 			reportDTO.setNeg(neg);
